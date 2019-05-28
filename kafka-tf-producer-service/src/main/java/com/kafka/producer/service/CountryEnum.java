@@ -6,15 +6,14 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public enum CountryEnum {
 
-	CHENNAI("India", "tamil nadu", "Chennai", ThreadLocalRandom.current().nextInt(92, 105)+.3), VELLOR("India", "tamil nadu", "vellor", ThreadLocalRandom.current().nextInt(92, 105)+.5),
-	KOVAI("India", "tamil nadu", "kovai", ThreadLocalRandom.current().nextInt(92, 105)+.4), TUTICORIN("India", "tamil nadu", "tuticorin", ThreadLocalRandom.current().nextInt(92, 105)+.6),
-	MADURAI("India", "tamil nadu", "madurai", ThreadLocalRandom.current().nextInt(92, 105)+.5), SALEM("India", "tamil nadu", "salem", ThreadLocalRandom.current().nextInt(92, 105)+.7),
-	Namakkal("India", "tamil nadu", "Namakkal", ThreadLocalRandom.current().nextInt(92, 105)+.7), Pammal("India", "tamil nadu", "pammal", ThreadLocalRandom.current().nextInt(92, 105)+.8),
-	tambaram("India", "tamil nadu", "tambaram", ThreadLocalRandom.current().nextInt(92, 105)+.9), medavakkam("India", "tamil nadu", "medavakkam", ThreadLocalRandom.current().nextInt(92, 105)+.1),
-	mouniya("SRILANKA", "tamil", "mouniya", ThreadLocalRandom.current().nextInt(92, 105)+.2), mullivaykal("SRILANKA", "tamil", "mullivaykal", ThreadLocalRandom.current().nextInt(92, 105)+.2),
-	Jayawardenepura("SRILANKA", "Kolumbu", "Jayawardenepura", ThreadLocalRandom.current().nextInt(92, 105)+.5),
-	mattakalapu("SRILANKA", "kolumbu", "mattakalapu", ThreadLocalRandom.current().nextInt(92, 105)+.0);
-
+CHENNAI("India", "tamil nadu", "Chennai", 101.1), VELLOR("India", "tamil nadu", "vellor", 105.0),
+	KOVAI("India", "tamil nadu", "kovai", 92.1), TUTICORIN("India", "tamil nadu", "tuticorin", 105.0),
+	MADURAI("India", "tamil nadu", "madurai", 101.1), SALEM("India", "tamil nadu", "salem", 105.0),
+	Namakkal("India", "tamil nadu", "Namakkal", 101.1), Pammal("India", "tamil nadu", "pammal", 115.8),
+	tambaram("India", "tamil nadu", "tambaram", 103.1), medavakkam("India", "tamil nadu", "medavakkam", 96.0),
+	mouniya("SRILANKA", "tamil", "mouniya", 103.1), mullivaykal("SRILANKA", "tamil", "mullivaykal", 116.8),
+	Jayawardenepura("SRILANKA", "Kolumbu", "Jayawardenepura", 106.1),
+	mattakalapu("SRILANKA", "kolumbu", "mattakalapu", 94.0);
 	private String country;
 	private String state;
 	private String city;
@@ -44,14 +43,18 @@ public enum CountryEnum {
 	}
 
 	public static List<Weather> getCountryList() {
+		 
+		ThreadLocalRandom.current().nextInt(1, 51);
 		List<Weather> weatherList = new ArrayList<Weather>();
 		CountryEnum[] countries = CountryEnum.values();
 		for (CountryEnum country : countries) {
+			Double decimal=(double) ThreadLocalRandom.current().nextInt(1, 9);
+			Double temp=ThreadLocalRandom.current().nextInt(92, 105)+decimal;
 			Weather weather = new Weather();
 			weather.setCountry(country.getCountry());
 			weather.setState(country.getState());
 			weather.setCity(country.getCity());
-			weather.setTemp(country.getTemp());
+			weather.setTemp(temp);
 			weatherList.add(weather);
 		}
 		return weatherList;
