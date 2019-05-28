@@ -40,7 +40,7 @@ public class ProducerService {
 			for (Weather weather : CountryEnum.getCountryList()) {
 
 				try {
-					Thread.sleep(2000);
+					//Thread.sleep(2000);
 					System.out.println("sending data='{}' to topic='{}'" + weather.toString() + "" + topic);
 					Message<Weather> message = MessageBuilder.withPayload(weather).setHeader(KafkaHeaders.TOPIC, topic)
 							.build();

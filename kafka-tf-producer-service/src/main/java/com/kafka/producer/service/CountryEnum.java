@@ -48,13 +48,14 @@ CHENNAI("India", "tamil nadu", "Chennai", 101.1), VELLOR("India", "tamil nadu", 
 		List<Weather> weatherList = new ArrayList<Weather>();
 		CountryEnum[] countries = CountryEnum.values();
 		for (CountryEnum country : countries) {
-			Double decimal=(double) ThreadLocalRandom.current().nextInt(1, 9);
-			Double temp=ThreadLocalRandom.current().nextInt(92, 105)+decimal;
+			Integer decimal= ThreadLocalRandom.current().nextInt(1, 9);
+			Integer temp=ThreadLocalRandom.current().nextInt(92, 105);
+			String tempStr=temp.toString()+"."+decimal.toString();
 			Weather weather = new Weather();
 			weather.setCountry(country.getCountry());
 			weather.setState(country.getState());
 			weather.setCity(country.getCity());
-			weather.setTemp(temp);
+			weather.setTemp(Double.parseDouble(tempStr));
 			weatherList.add(weather);
 		}
 		return weatherList;
