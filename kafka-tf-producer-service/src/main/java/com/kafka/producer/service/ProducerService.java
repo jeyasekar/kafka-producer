@@ -17,13 +17,16 @@ public class ProducerService {
 	private final KafkaTemplate<String, Weather> kafkaTemplate;
 
 	@Autowired
-	public ProducerService(KafkaTemplate<String,Weather> kafkaTemplate) {
+	public ProducerService(KafkaTemplate<String, Weather> kafkaTemplate) {
 		this.kafkaTemplate = kafkaTemplate;
 	}
 
+	@Autowired
+	private WeatherReportUtil weather;
+
 	public void sendMessage() {
 		String topic = "meenatopic";
-		
+
 		/*
 		 * File file = new File("C:/KafkaProd/"); File[] files = file.listFiles(); for
 		 * (File f : files) { System.out.println(f.getName()); String fileName =
@@ -37,20 +40,22 @@ public class ProducerService {
 		 * System.out.println(filecontent);
 		 */
 		while (true) {
-			for (Weather weather : CountryEnum.getCountryList()) {
-
-				try {
-					//Thread.sleep(2000);
-					System.out.println("sending data='{}' to topic='{}'" + weather.toString() + "" + topic);
-					Message<Weather> message = MessageBuilder.withPayload(weather).setHeader(KafkaHeaders.TOPIC, topic)
-							.build();
+			try {
+				//Thread.sleep(9000);
+				// for (Weather weather : CountryEnum.getCountryList()) {
+				for (String city : CityConstant.CITY) {
+					Weather wea=weather.getWeatherReport(city.trim());
+					Thread.sleep(1000);
+					System.out.println("sending data='{}' to topic='{}'" + wea.toString() + "" + topic);
+					Message<Weather> message = MessageBuilder.withPayload(wea)
+							.setHeader(KafkaHeaders.TOPIC, topic).build();
 					this.kafkaTemplate.send(message);
 
-				} catch (Exception e) {
-
-					e.printStackTrace();
-
 				}
+
+			} catch (Exception e) {
+
+				e.printStackTrace();
 			}
 		}
 
