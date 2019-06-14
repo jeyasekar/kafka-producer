@@ -39,13 +39,12 @@ public class ProducerService {
 		 * 
 		 * System.out.println(filecontent);
 		 */
-		while (true) {
+		//while (true) {
 			try {
-				//Thread.sleep(9000);
 				// for (Weather weather : CountryEnum.getCountryList()) {
 				for (String city : CityConstant.CITY) {
 					Weather wea=weather.getWeatherReport(city.trim());
-					Thread.sleep(1000);
+					//Thread.sleep(1000);
 					System.out.println("sending data='{}' to topic='{}'" + wea.toString() + "" + topic);
 					Message<Weather> message = MessageBuilder.withPayload(wea)
 							.setHeader(KafkaHeaders.TOPIC, topic).build();
@@ -61,4 +60,4 @@ public class ProducerService {
 
 	}
 
-}
+
