@@ -32,7 +32,6 @@ public final class CityConstant {
 			,"Dhemaji                  "
 			,"Dhubri                   "
 			,"Dibrugarh                "
-			,"Dima Hasao               "
 			,"Goalpara                 "
 			,"Golaghat                 "
 			,"Hailakandi               "
